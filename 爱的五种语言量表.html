@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱的五种语言量表测试</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .question h3 {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        input[type="radio"] {
+            accent-color: #4299e1;
+        }
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #4299e1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background 0.3s;
+        }
+        .submit-btn:hover {
+            background-color: #3182ce;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f4f8;
+            border-radius: 8px;
+            display: none;
+        }
+        .result h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .result-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .result-item {
+            padding: 10px;
+            background: white;
+            border-radius: 6px;
+            text-align: center;
+        }
+        .result-item span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4299e1;
+            display: block;
+        }
+        .result-desc {
+            margin-top: 20px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        .warning {
+            color: #e53e3e;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>爱的五种语言量表</h1>
+        <div class="warning" id="warning">请完成所有30道题的选择后再提交！</div>
+        
+        <!-- 题目区域 -->
+        <div id="questions">
+            <!-- 第1题 -->
+            <div class="question">
+                <h3>1. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q1" value="A"> A 我喜欢收到你的字条，上面写着肯定的话语
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q1" value="E"> E 我喜欢你拥抱我
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第2题 -->
+            <div class="question">
+                <h3>2. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q2" value="B"> B 我喜欢和你有单独相处的时间
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q2" value="D"> D 当你对我提供实际帮助时，我感受到被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第3题 -->
+            <div class="question">
+                <h3>3. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q3" value="D"> D 你送我礼物时，我感受到被爱
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q3" value="B"> B 我喜欢和你一起去散步，即使只是走路
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第4题 -->
+            <div class="question">
+                <h3>4. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q4" value="D"> D 当你做一些事情来帮助我忙的时候，我感受到被爱
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q4" value="E"> E 当你拍我的肩或牵我的手时，我感受到被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第5题 -->
+            <div class="question">
+                <h3>5. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q5" value="E"> E 当你大大拥抱我时，我感受到被爱
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q5" value="C"> C 我收到你送的礼物时，我感受到被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第6题 -->
+            <div class="question">
+                <h3>6. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q6" value="B"> B 我喜欢和你一起去四处走走
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q6" value="E"> E 我喜欢和你手拉手/勾肩搭背
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第7题 -->
+            <div class="question">
+                <h3>7. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q7" value="B"> B 具体可见的「爱的象征」（例如：礼物）对我来说非常重要
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q7" value="A"> A 当你肯定我的优点时，我感受到被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第8题 -->
+            <div class="question">
+                <h3>8. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q8" value="E"> E 我喜欢和你坐得很靠近
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q8" value="A"> A 我喜欢你告诉我，我很棒/迷人/聪明/优秀……
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第9题 -->
+            <div class="question">
+                <h3>9. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q9" value="B"> B 我喜欢花时间和你在一起
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q9" value="C"> C 我喜欢收到你送的小礼物
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第10题 -->
+            <div class="question">
+                <h3>10. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q10" value="A"> A 我很重视你对我说接纳、肯定的话语
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q10" value="D"> D 当你帮我忙的时候，我知道你爱我
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第11题 -->
+            <div class="question">
+                <h3>11. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q11" value="B"> B 我喜欢和你一起做一些事
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q11" value="A"> A 我喜欢和你对我说仁慈的话语
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第12题 -->
+            <div class="question">
+                <h3>12. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q12" value="D"> D 你的行动付出比你的话语更容易感动我
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q12" value="E"> E 当我们拥抱的时候，我感觉自己是完全的
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第13题 -->
+            <div class="question">
+                <h3>13. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q13" value="A"> A 我重视你对我的赞美，远超过你对我的批评
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q13" value="C"> C 你若送我几件经济实惠的礼物，比送一起大礼物，对我更具意义
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第14题 -->
+            <div class="question">
+                <h3>14. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q14" value="B"> B 当我们在一起谈话或一起做一件事，我感觉与你很亲近
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q14" value="E"> E 当你常常触摸我时，我感觉与你更亲近
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第15题 -->
+            <div class="question">
+                <h3>15. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q15" value="A"> A 我喜欢你称赞我的成就
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q15" value="C"> C 当你为我做一些其实是你不喜欢的事时，我知道你爱我
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第16题 -->
+            <div class="question">
+                <h3>16. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q16" value="E"> E 你走过我身旁时，我喜欢你碰触我
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q16" value="B"> B 当你同理倾听我时，我感觉被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第17题 -->
+            <div class="question">
+                <h3>17. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q17" value="D"> D 当你帮我做事情时，我感受到被爱
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q17" value="C"> C 收到你送我的礼物，真是一大享受
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第18题 -->
+            <div class="question">
+                <h3>18. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q18" value="A"> A 我喜欢你称赞我的外表
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q18" value="B"> B 当你花时间来了解我的感觉时，我感受到被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第19题 -->
+            <div class="question">
+                <h3>19. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q19" value="E"> E 你在触摸我时，让我感觉很安全
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q19" value="D"> D 你有服事的行动时，我感觉被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第20题 -->
+            <div class="question">
+                <h3>20. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q20" value="D"> D 我看重你为我做的许多事
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q20" value="C"> C 我喜欢收到你自己做的礼物
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第21题 -->
+            <div class="question">
+                <h3>21. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q21" value="B"> B 我最喜欢的是—当你把全部的注意力放在我身上时
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q21" value="D"> D 我最喜欢的是—当你做某件事来为我服务时
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第22题 -->
+            <div class="question">
+                <h3>22. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q22" value="C"> C 你用一件礼物来庆祝我的生日时，我感受到被爱
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q22" value="A"> A 你用意义深远的话语（说或写）来庆祝我的生日时，我感受到被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第23题 -->
+            <div class="question">
+                <h3>23. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q23" value="C"> C 当你送我我一件礼物时，我知道你有想到我
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q23" value="D"> D 当你帮忙我处理事情时，我感受到被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第24题 -->
+            <div class="question">
+                <h3>24. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q24" value="A"> A 我很看重你耐心倾听，不打断我说话
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q24" value="C"> C 我很看重你用礼物来纪念特别的日子
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第25题 -->
+            <div class="question">
+                <h3>25. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q25" value="D"> D 我喜欢知道，你很关心我，甚至帮忙我处理日常工作
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q25" value="B"> B 我喜欢和你一起长途旅行
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第26题 -->
+            <div class="question">
+                <h3>26. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q26" value="E"> E 出奇不意的拥抱或亲吻我，会让我惊喜莫名
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q26" value="C"> C 没有特别原因而送我礼物，会让我惊喜莫名
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第27题 -->
+            <div class="question">
+                <h3>27. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q27" value="A"> A 我很高兴听到你说「你很看重我」
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q27" value="B"> B 我们谈话时，我喜欢你看重我的感觉更胜于你给我的建议
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第28题 -->
+            <div class="question">
+                <h3>28. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q28" value="C"> C 你送的礼物对我而言，都是爱的表示
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q28" value="E"> E 当你触摸我时，我感觉很美好
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第29题 -->
+            <div class="question">
+                <h3>29. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q29" value="D"> D 当你热心的做某件我所要求的工作时，我感觉到被爱
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q29" value="A"> A 当你告诉我你有多么看重我的话的时候，我感觉被爱
+                    </label>
+                </div>
+            </div>
+
+            <!-- 第30题 -->
+            <div class="question">
+                <h3>30. 选择最适合你的选项：</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="q30" value="E"> E 我每一天都需要被触摸
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="q30" value="A"> A 我每一天都需要你对我说肯定的话题
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <button class="submit-btn" id="submitBtn">提交并查看结果</button>
+
+        <!-- 结果展示区域 -->
+        <div class="result" id="result">
+            <h2>你的爱的五种语言量表结果</h2>
+            <div class="result-list">
+                <div class="result-item">
+                    A 肯定的言词<br>
+                    <span id="countA">0</span> 分
+                </div>
+                <div class="result-item">
+                    B 精心的时刻<br>
+                    <span id="countB">0</span> 分
+                </div>
+                <div class="result-item">
+                    C 接受礼物<br>
+                    <span id="countC">0</span> 分
+                </div>
+                <div class="result-item">
+                    D 服务的行动<br>
+                    <span id="countD">0</span> 分
+                </div>
+                <div class="result-item">
+                    E 身体的接触<br>
+                    <span id="countE">0</span> 分
+                </div>
+            </div>
+            <div class="result-desc">
+                <p>※ 得分最高的项目显示你的主要的爱的语言，次高的代表次要的爱的语言，如果两个分数相同，表示你是「双语的」（有两种主要的爱的语言）</p>
+                <p>※ 五项合计应等于 30 分</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 获取元素
+        const submitBtn = document.getElementById('submitBtn');
+        const result = document.getElementById('result');
+        const warning = document.getElementById('warning');
+        const countA = document.getElementById('countA');
+        const countB = document.getElementById('countB');
+        const countC = document.getElementById('countC');
+        const countD = document.getElementById('countD');
+        const countE = document.getElementById('countE');
+
+        // 提交按钮点击事件
+        submitBtn.addEventListener('click', function() {
+            // 初始化计数
+            let counts = {
+                A: 0,
+                B: 0,
+                C: 0,
+                D: 0,
+                E: 0
+            };
+            let isComplete = true;
+
+            // 遍历30道题
+            for (let i = 1; i <= 30; i++) {
+                const radios = document.getElementsByName(`q${i}`);
+                let selected = false;
+
+                // 检查每道题是否选中
+                for (const radio of radios) {
+                    if (radio.checked) {
+                        counts[radio.value]++;
+                        selected = true;
+                        break;
+                    }
+                }
+
+                // 如果有未选中的题，标记为未完成
+                if (!selected) {
+                    isComplete = false;
+                    break;
+                }
+            }
+
+            // 判断是否完成所有题目
+            if (!isComplete) {
+                warning.style.display = 'block';
+                result.style.display = 'none';
+                return;
+            }
+
+            // 隐藏警告，显示结果
+            warning.style.display = 'none';
+            result.style.display = 'block';
+
+            // 更新计数显示
+            countA.textContent = counts.A;
+            countB.textContent = counts.B;
+            countC.textContent = counts.C;
+            countD.textContent = counts.D;
+            countE.textContent = counts.E;
+        });
+    </script>
+</body>
+</html>
